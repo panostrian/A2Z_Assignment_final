@@ -128,19 +128,11 @@ public class FrmBookSearchList extends JFrame {
                 data[4] = rs.getString("BOOK_AUTHOR");
                 model.addRow(data);
             }
+            
+            table_1.setModel(model);
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
-
-        table_1.setModel(new DefaultTableModel(
-        	new Object[][] {
-        	},
-        	new String[] {
-        		"ID", "Title", "Year", "Edition", "Author"
-        	}
-        ));
-
-        
 
 
         JPanel panel1 = new JPanel();
