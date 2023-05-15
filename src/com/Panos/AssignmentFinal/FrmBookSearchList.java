@@ -8,7 +8,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
