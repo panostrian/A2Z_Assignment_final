@@ -171,7 +171,7 @@ public class MainWindow extends JFrame {
         rigidArea.setFont(null);
         rigidArea.setBackground(new Color(0, 0, 0));
         rigidArea.setForeground(new Color(0, 0, 0));
-        rigidArea.setBounds(0, 84, 446, 212);
+        rigidArea.setBounds(0, 84, 444, 237);
         contentPane.add(rigidArea);
     }
     
