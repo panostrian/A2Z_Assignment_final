@@ -167,9 +167,10 @@ public class FrmBookView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String query = "UPDATE BOOK set BOOK_TITLE = ?, BOOK_YEAR = ?, BOOK_EDITION = ? , BOOK_AUTHOR = ?  where BOOK_ID = ?";
+
 					Connection conn = DBconnector.getConnection();
 					PreparedStatement preparedStmt = conn.prepareStatement(query);
-					
+
 					preparedStmt.setString(1, textFieldTitle_view.getText());
 					preparedStmt.setInt(2, Integer.parseInt(textFieldYear_view.getText()));
 					preparedStmt.setInt(3, Integer.parseInt(textFieldEdition_view.getText()));
@@ -190,7 +191,7 @@ public class FrmBookView extends JFrame {
 		btn_update.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
 		btn_update.setBounds(290, 284, 95, 25);
 		contentPane.add(btn_update);
-		
+
 //===========================================================================================
 		// Event Handler for Delete
 		JButton btn_delete = new JButton("Delete");
@@ -201,7 +202,7 @@ public class FrmBookView extends JFrame {
 					Connection conn = DBconnector.getConnection();
 					PreparedStatement preparedStmt = conn.prepareStatement(query);
 					preparedStmt.setInt(1, Integer.parseInt(textFieldBookID_view.getText()));
-					
+
 //===========================================================================================
 					// Execute the prepared statement after confirmation
 					int dialogButton;
@@ -222,7 +223,7 @@ public class FrmBookView extends JFrame {
 		btn_delete.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
 		btn_delete.setBounds(186, 284, 95, 25);
 		contentPane.add(btn_delete);
-		
+
 //===========================================================================================
 		// Event Handler for clicking First Record Icon
 		JButton btnFirst = new JButton("");
@@ -244,7 +245,7 @@ public class FrmBookView extends JFrame {
 		});
 		btnFirst.setBounds(186, 240, 50, 25);
 		contentPane.add(btnFirst);
-		
+
 		// Event Handler for clicking Previous Record Icon
 		JButton btnPrev = new JButton("");
 		btnPrev.setIcon(new ImageIcon(FrmBookView.class.getResource("/resources/PreviousRecord.png")));
@@ -308,7 +309,7 @@ public class FrmBookView extends JFrame {
 		});
 		btnLast.setBounds(335, 240, 50, 25);
 		contentPane.add(btnLast);
-	
+
 //===========================================================================================
 
 		JPanel panel3 = new JPanel();
@@ -318,7 +319,6 @@ public class FrmBookView extends JFrame {
 
 	}
 
-	
 	// Update the fields based on the current record in the result set
 	private void updateFieldsFromResultSet() throws SQLException {
 		textFieldBookID_view.setText(Integer.toString(rs.getInt("BOOK_ID")));
