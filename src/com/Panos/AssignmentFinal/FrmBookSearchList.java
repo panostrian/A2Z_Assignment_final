@@ -120,7 +120,6 @@ public class FrmBookSearchList extends JFrame {
 		table_1.setEnabled(false);// To disable user edit from table directly , making it view-only
 		table_1.setCellSelectionEnabled(true);// To allow the user to select data from the table without editing it
 
-
 		String[] columnNames = { "ID", "Title", "Year", "Edition", "Author" };
 		DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
@@ -153,7 +152,7 @@ public class FrmBookSearchList extends JFrame {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		
+
 //===========================================================================================
 
 		// The JPanel
@@ -164,9 +163,8 @@ public class FrmBookSearchList extends JFrame {
 
 	}
 
-	
 //===========================================================================================
-	
+
 	// A class to refresh the table data after a change
 	void refreshData() {
 		DefaultTableModel model = (DefaultTableModel) table_1.getModel();

@@ -111,18 +111,18 @@ public class FrmBookInsert extends JFrame {
 					String author = textFieldAuthor.getText();
 
 					Connection conn = DBconnector.getConnection();
-					PreparedStatement p = conn.prepareStatement(
+					PreparedStatement ps = conn.prepareStatement(
 							"INSERT INTO BOOK (BOOK_TITLE, BOOK_YEAR, BOOK_EDITION, BOOK_AUTHOR) VALUES (?, ?, ?, ?)");
-					p.setString(1, title);
-					p.setString(2, year);
-					p.setString(3, edition);
-					p.setString(4, author);
+					ps.setString(1, title);
+					ps.setString(2, year);
+					ps.setString(3, edition);
+					ps.setString(4, author);
 
-					int n = p.executeUpdate();
+					int n = ps.executeUpdate();
 
 					JOptionPane.showMessageDialog(null, n + " Record inserted.", "INSERT", JOptionPane.PLAIN_MESSAGE);
 
-					p.close();
+					ps.close();
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, "Error occurred while inserting the record.", "Error",
 							JOptionPane.WARNING_MESSAGE);

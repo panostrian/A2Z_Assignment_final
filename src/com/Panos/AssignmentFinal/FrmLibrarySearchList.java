@@ -140,7 +140,7 @@ public class FrmLibrarySearchList extends JFrame {
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
-				Object[] data = new Object[5];
+				Object[] data = new Object[4];
 				data[0] = rs.getInt("LIBRARY_ID");
 				data[1] = rs.getString("LIBRARY_NAME");
 				data[2] = rs.getString("LIBRARY_ADDRESS");
@@ -178,7 +178,7 @@ public class FrmLibrarySearchList extends JFrame {
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
-				Object[] data = new Object[5];
+				Object[] data = new Object[4];
 				data[0] = rs.getInt("LIBRARY_ID");
 				data[1] = rs.getString("LIBRARY_NAME");
 				data[2] = rs.getString("LIBRARY_ADDRESS");
