@@ -86,7 +86,7 @@ public class FrmBookInsert extends JFrame {
 		textFieldBookID.setColumns(12);
 
 		textFieldTitle = new JTextField();
-		textFieldTitle.setBounds(116, 80, 430, 25);
+		textFieldTitle.setBounds(116, 80, 442, 25);
 		contentPane.add(textFieldTitle);
 		textFieldTitle.setColumns(10);
 
@@ -173,7 +173,7 @@ public class FrmBookInsert extends JFrame {
 
 		textFieldAuthor = new JTextField();
 		textFieldAuthor.setColumns(10);
-		textFieldAuthor.setBounds(117, 200, 429, 25);
+		textFieldAuthor.setBounds(117, 200, 441, 25);
 		contentPane.add(textFieldAuthor);
 
 		JSeparator separator_1 = new JSeparator();

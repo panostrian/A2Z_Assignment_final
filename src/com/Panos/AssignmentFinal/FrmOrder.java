@@ -86,7 +86,7 @@ public class FrmOrder extends JFrame {
 		lblStock.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblStock.setForeground(new Color(153, 0, 0));
 		lblStock.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
-		lblStock.setBounds(32, 160, 136, 25);
+		lblStock.setBounds(10, 160, 158, 25);
 		contentPane.add(lblStock);
 
 		textFieldStock = new JTextField();
@@ -168,28 +168,25 @@ public class FrmOrder extends JFrame {
 		btnClose.setBounds(463, 283, 95, 25);
 		contentPane.add(btnClose);
 
-//===========================================================================================
-
-		// JPanel Container
-		JPanel panel1 = new JPanel();
-		panel1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel1.setBounds(513, -230, 564, 308);
-		contentPane.add(panel1);
-
-		JSeparator separator = new JSeparator();
-		panel1.add(separator);
-
 //==========================================================================================
 
 		// JComboBox for book dropdown
 		JComboBox<String> bookDropdown = new JComboBox<>();
-		bookDropdown.setBounds(200, 53, 178, 31);
+		bookDropdown.setBounds(200, 53, 308, 31);
 		contentPane.add(bookDropdown);
 
 		//JComboBox for library dropdown
 		JComboBox<String> libraryDropdown = new JComboBox<>();
-		libraryDropdown.setBounds(200, 112, 181, 28);
+		libraryDropdown.setBounds(200, 112, 308, 28);
 		contentPane.add(libraryDropdown);
+		
+		//===========================================================================================
+		
+				// JPanel Container
+				JPanel panel1 = new JPanel();
+				panel1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				panel1.setBounds(10, 11, 564, 308);
+				contentPane.add(panel1);
 
 		// Populate book dropdown with data from the database
 		try {
@@ -232,6 +229,7 @@ public class FrmOrder extends JFrame {
 	}
 
 	// Private Method: getAllLibraryIDs()
+	
 	private List<String> getAllLibraryIDs() throws SQLException {
 		List<String> libraryIDs = new ArrayList<>();
 
@@ -248,6 +246,7 @@ public class FrmOrder extends JFrame {
 	}
 
 	//	Private Method: getBookNameByID(bookID)
+	
 	private String getBookNameByID(String bookID) throws SQLException {
 		String bookName = null;
 
@@ -265,6 +264,7 @@ public class FrmOrder extends JFrame {
 	}
 
 	// Private Method: getLibraryNameByID(libraryID)
+	
 	private String getLibraryNameByID(String libraryID) throws SQLException {
 		String libraryName = null;
 
