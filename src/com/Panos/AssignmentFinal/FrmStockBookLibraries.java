@@ -94,7 +94,7 @@ public class FrmStockBookLibraries extends JFrame {
 				table_3.setEnabled(false);// To disable user edit from table directly , making it view-only
 				table_3.setCellSelectionEnabled(true);// To allow the user to select data from the table without editing it
 
-				String[] columnNames = { "Library_ID", "Book_ID", "Available Stock"};
+				String[] columnNames = { "Order_ID", "Library_ID", "Book_ID", "Available Stock"};
 				DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
 				DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
@@ -108,14 +108,14 @@ public class FrmStockBookLibraries extends JFrame {
 				try {
 
 					Connection conn = DBconnector.getConnection();
-					String query = "SELECT * FROM BOOKLIBRARIES";
+					String query = "SELECT * FROM LIBRARYBOOKS";
 					PreparedStatement pst = conn.prepareStatement(query);
 					ResultSet rs = pst.executeQuery();
 
 					while (rs.next()) {
 						Object[] data = new Object[3];
-						data[0] = rs.getInt("BOOK_ID");
-						data[1] = rs.getString("LIBRARY_ID");
+						data[0] = rs.getInt("ORDER_BOOK_ID");
+						data[1] = rs.getString("ORDER_LIBRARY_ID");
 						data[2] = rs.getInt("STOCK");
 						model.addRow(data);
 					}
@@ -144,14 +144,14 @@ public class FrmStockBookLibraries extends JFrame {
 
 		try {
 			Connection conn = DBconnector.getConnection();
-			String query = "SELECT * FROM BOOKLIBRARIES";
+			String query = "SELECT * FROM LIBRARYBOOKS";
 			PreparedStatement pst = conn.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
 				Object[] data = new Object[3];
-				data[0] = rs.getInt("BOOK_ID");
-				data[1] = rs.getString("LIBRARY_ID");
+				data[0] = rs.getInt("ORDER_BOOK_ID");
+				data[1] = rs.getString("ORDER_LIBRARY_ID");
 				data[2] = rs.getInt("STOCK");
 				model.addRow(data);
 			}

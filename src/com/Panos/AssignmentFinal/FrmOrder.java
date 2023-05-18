@@ -216,7 +216,7 @@ public class FrmOrder extends JFrame {
 	private List<String> getAllBookIDs() throws SQLException {
 		List<String> bookIDs = new ArrayList<>();
 
-		String query = "SELECT ID FROM BOOK";
+		String query = "SELECT BOOK_ID FROM BOOK";
 		Connection conn = DBconnector.getConnection();
 		try (PreparedStatement ps = conn.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
@@ -233,7 +233,7 @@ public class FrmOrder extends JFrame {
 	private List<String> getAllLibraryIDs() throws SQLException {
 		List<String> libraryIDs = new ArrayList<>();
 
-		String query = "SELECT ID FROM LIBRARY";
+		String query = "SELECT LIBRARY_ID FROM LIBRARY";
 		Connection conn = DBconnector.getConnection();
 		try (PreparedStatement ps = conn.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
@@ -250,13 +250,13 @@ public class FrmOrder extends JFrame {
 	private String getBookNameByID(String bookID) throws SQLException {
 		String bookName = null;
 
-		String query = "SELECT Name FROM BOOK WHERE ID = ?";
+		String query = "SELECT BOOK_TITLE FROM BOOK WHERE BOOK_ID = ?";
 		Connection conn = DBconnector.getConnection();
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, bookID);
 			ResultSet resultSet = ps.executeQuery();
 			if (resultSet.next()) {
-				bookName = resultSet.getString("Name");
+				bookName = resultSet.getString("BOOK_TITLE");
 			}
 		}
 
@@ -268,13 +268,13 @@ public class FrmOrder extends JFrame {
 	private String getLibraryNameByID(String libraryID) throws SQLException {
 		String libraryName = null;
 
-		String query = "SELECT Name FROM LIBRARY WHERE ID = ?";
+		String query = "SELECT LIBRARY_NAME FROM LIBRARY WHERE LIBRARY_ID = ?";
 		Connection conn = DBconnector.getConnection();
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, libraryID);
 			ResultSet resultSet = ps.executeQuery();
 			if (resultSet.next()) {
-				libraryName = resultSet.getString("Name");
+				libraryName = resultSet.getString("LIBRARY_NAME");
 			}
 		}
 

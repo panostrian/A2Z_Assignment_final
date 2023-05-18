@@ -116,8 +116,8 @@ public class FrmLibraryInsert extends JFrame {
 					String phone = textFieldPhone.getText();
 
 					Connection conn = DBconnector.getConnection();
-					PreparedStatement p = conn
-							.prepareStatement("INSERT INTO LIBRARY  (LIBRARY_NAME, LIBRARY_ADDRESS, LIBRARY_PHONE)");
+					PreparedStatement p = conn.prepareStatement(
+							"INSERT INTO LIBRARY  (LIBRARY_NAME, LIBRARY_ADDRESS, LIBRARY_PHONE) VALUES (?, ?, ?)");
 					p.setString(1, libname);
 					p.setString(2, address);
 					p.setString(3, phone);

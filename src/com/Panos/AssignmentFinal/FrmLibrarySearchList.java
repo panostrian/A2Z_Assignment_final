@@ -144,7 +144,7 @@ public class FrmLibrarySearchList extends JFrame {
 				data[0] = rs.getInt("LIBRARY_ID");
 				data[1] = rs.getString("LIBRARY_NAME");
 				data[2] = rs.getString("LIBRARY_ADDRESS");
-				data[3] = rs.getInt("LIBRARY_PHONE");
+				data[3] = rs.getString("LIBRARY_PHONE");
 				model.addRow(data);
 			}
 
@@ -182,7 +182,7 @@ public class FrmLibrarySearchList extends JFrame {
 				data[0] = rs.getInt("LIBRARY_ID");
 				data[1] = rs.getString("LIBRARY_NAME");
 				data[2] = rs.getString("LIBRARY_ADDRESS");
-				data[3] = rs.getInt("LIBRARY_PHONE");
+				data[3] = rs.getString("LIBRARY_PHONE");
 				model.addRow(data);
 			}
 

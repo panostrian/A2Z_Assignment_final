@@ -158,7 +158,7 @@ public class FrmLibraryView extends JFrame {
 
 					preparedStmt.setString(1, textFieldLibraryName_view.getText());
 					preparedStmt.setString(2, textFieldAddress_view.getText());
-					preparedStmt.setInt(3, Integer.parseInt(textFieldPhone_view.getText()));
+					preparedStmt.setString(3, textFieldPhone_view.getText());
 
 					int numberOfRowsAffected = preparedStmt.executeUpdate();
 
@@ -305,6 +305,6 @@ public class FrmLibraryView extends JFrame {
 		textFieldLibraryID_view.setText(Integer.toString(rs.getInt("LIBRARY_ID")));
 		textFieldLibraryName_view.setText(rs.getString("LIBRARY_NAME"));
 		textFieldAddress_view.setText(rs.getString("LIBRARY_ADDRESS"));
-		textFieldPhone_view.setText(Integer.toString(rs.getInt("LIBRARY_PHONE")));
+		textFieldPhone_view.setText(rs.getString("LIBRARY_PHONE"));
 	}
 }
