@@ -35,23 +35,18 @@ public class FrmOrder extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	// Fields
 	private JTextField textFieldStock;
 	private JComboBox<String> bookDropdown = new JComboBox<>();
 	private JComboBox<String> libraryDropdown = new JComboBox<>();
 
 //==========================================================================================
-	// Constructor: FrmOrder()
 	public FrmOrder() {
-		// Initialize JFrame properties
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/resources/aueb.jpg")));
 		this.setTitle("Add a New Order of books in libraries");
 		this.setBackground(SystemColor.activeCaption);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setBounds(100, 100, 600, 371);
 
-		// Create JPanel for content pane
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
