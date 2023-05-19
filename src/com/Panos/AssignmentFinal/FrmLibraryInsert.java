@@ -52,6 +52,7 @@ public class FrmLibraryInsert extends JFrame {
 				textFieldLibraryID.setText("");
 				textFieldLibraryName.setText("");
 				textFieldAddress.setText("");
+				textFieldPhone.setText("");
 			}
 		});
 
@@ -61,28 +62,7 @@ public class FrmLibraryInsert extends JFrame {
 		lblLibraryID.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
 		lblLibraryID.setBounds(68, 39, 60, 25);
 		contentPane.add(lblLibraryID);
-
-		JLabel lblLibraryName = new JLabel("Library Name");
-		lblLibraryName.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblLibraryName.setForeground(new Color(153, 0, 0));
-		lblLibraryName.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
-		lblLibraryName.setBounds(17, 79, 111, 25);
-		contentPane.add(lblLibraryName);
-
-		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAddress.setForeground(new Color(153, 0, 0));
-		lblAddress.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
-		lblAddress.setBounds(48, 119, 80, 22);
-		contentPane.add(lblAddress);
-
-		JLabel lblPhone = new JLabel("Phone ");
-		lblPhone.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPhone.setForeground(new Color(153, 0, 0));
-		lblPhone.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
-		lblPhone.setBounds(58, 160, 70, 25);
-		contentPane.add(lblPhone);
-
+		
 		textFieldLibraryID = new JTextField();
 		textFieldLibraryID.setEditable(false);
 		textFieldLibraryID.setFont(new Font("Malgun Gothic", Font.PLAIN, 16));
@@ -91,15 +71,43 @@ public class FrmLibraryInsert extends JFrame {
 		contentPane.add(textFieldLibraryID);
 		textFieldLibraryID.setColumns(12);
 
+
+		JLabel lblLibraryName = new JLabel("Library Name");
+		lblLibraryName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblLibraryName.setForeground(new Color(153, 0, 0));
+		lblLibraryName.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+		lblLibraryName.setBounds(17, 79, 111, 25);
+		contentPane.add(lblLibraryName);
+
 		textFieldLibraryName = new JTextField();
 		textFieldLibraryName.setBounds(148, 80, 376, 25);
 		contentPane.add(textFieldLibraryName);
 		textFieldLibraryName.setColumns(10);
-
+		
+		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAddress.setForeground(new Color(153, 0, 0));
+		lblAddress.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+		lblAddress.setBounds(48, 119, 80, 22);
+		contentPane.add(lblAddress);
+		
 		textFieldAddress = new JTextField();
 		textFieldAddress.setBounds(148, 122, 376, 25);
 		textFieldAddress.setColumns(10);
 		contentPane.add(textFieldAddress);
+
+		JLabel lblPhone = new JLabel("Phone ");
+		lblPhone.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPhone.setForeground(new Color(153, 0, 0));
+		lblPhone.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+		lblPhone.setBounds(58, 160, 70, 25);
+		contentPane.add(lblPhone);
+		
+		textFieldPhone = new JTextField();
+		textFieldPhone.setBounds(148, 163, 376, 25);
+		contentPane.add(textFieldPhone);
+		textFieldPhone.setColumns(10);
+
 
 //===========================================================================================
 
@@ -147,29 +155,24 @@ public class FrmLibraryInsert extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DriverClass.librarysearchlist.setEnabled(true);
 				DriverClass.libraryinsert.setVisible(false);
+				DriverClass.librarysearchlist.refreshData(); // Refresh the table data
 			}
 		});
 		btnClose.setBounds(463, 283, 95, 25);
 		contentPane.add(btnClose);
 
-		textFieldPhone = new JTextField();
-		textFieldPhone.setBounds(148, 163, 376, 25);
-		contentPane.add(textFieldPhone);
-		textFieldPhone.setColumns(10);
 
+		
+//===========================================================================================
+		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(68, 271, 445, 2);
 		contentPane.add(separator_1);
-
-//===========================================================================================
 
 		// JPanel Container
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(10, 10, 564, 308);
 		contentPane.add(panel);
-
-		JSeparator separator = new JSeparator();
-		panel.add(separator);
 	}
 }

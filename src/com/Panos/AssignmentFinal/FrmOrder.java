@@ -35,22 +35,23 @@ public class FrmOrder extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	//Fields
+
+	// Fields
 	private JTextField textFieldStock;
 	private JComboBox<String> bookDropdown = new JComboBox<>();
 	private JComboBox<String> libraryDropdown = new JComboBox<>();
+
 //==========================================================================================
-	//Constructor: FrmOrder()
+	// Constructor: FrmOrder()
 	public FrmOrder() {
-		//Initialize JFrame properties
+		// Initialize JFrame properties
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/resources/aueb.jpg")));
 		this.setTitle("Add a New Order of books in libraries");
 		this.setBackground(SystemColor.activeCaption);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setBounds(100, 100, 600, 371);
 
-		//Create JPanel for content pane
+		// Create JPanel for content pane
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -61,13 +62,15 @@ public class FrmOrder extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-
+				// Clear input fields
+				textFieldStock.setText("");
+				bookDropdown.setSelectedIndex(0);
+				libraryDropdown.setSelectedIndex(0);
 			}
 		});
 
 //==========================================================================================
-		
-		
+
 		JLabel lblBook = new JLabel("Select Book");
 		lblBook.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblBook.setForeground(new Color(153, 0, 0));
@@ -115,7 +118,7 @@ public class FrmOrder extends JFrame {
 				int stock = Integer.parseInt(textFieldStock.getText());
 
 				// Check if the combination already exists in the BOOKLIBRARIES table
-				String query = "SELECT * FROM BOOKLIBRARIES WHERE BOOK_ID = ? AND LIBRARY_ID = ?";
+				String query = "SELECT * FROM LIBRARYBOOKS WHERE BOOK_ID = ? AND LIBRARY_ID = ?";
 				try (Connection conn = DBconnector.getConnection();
 						PreparedStatement ps = conn.prepareStatement(query)) {
 					ps.setString(1, selectedBookID);
@@ -127,7 +130,7 @@ public class FrmOrder extends JFrame {
 								JOptionPane.ERROR_MESSAGE);
 					} else {
 						// Combination doesn't exist, insert new row into BOOKLIBRARIES table
-						String insertQuery = "INSERT INTO BOOKLIBRARIES (BOOK_ID, LIBRARY_ID, STOCK) VALUES (?, ?, ?)";
+						String insertQuery = "INSERT INTO LIBRARYBOOKS (BOOK_ID, LIBRARY_ID, STOCK) VALUES (?, ?, ?)";
 						try (PreparedStatement insertPs = conn.prepareStatement(insertQuery)) {
 							insertPs.setString(1, selectedBookID);
 							insertPs.setString(2, selectedLibraryID);
@@ -175,18 +178,18 @@ public class FrmOrder extends JFrame {
 		bookDropdown.setBounds(200, 53, 308, 31);
 		contentPane.add(bookDropdown);
 
-		//JComboBox for library dropdown
+		// JComboBox for library dropdown
 		JComboBox<String> libraryDropdown = new JComboBox<>();
 		libraryDropdown.setBounds(200, 112, 308, 28);
 		contentPane.add(libraryDropdown);
-		
-		//===========================================================================================
-		
-				// JPanel Container
-				JPanel panel1 = new JPanel();
-				panel1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-				panel1.setBounds(10, 11, 564, 308);
-				contentPane.add(panel1);
+
+//===========================================================================================
+
+		// JPanel Container
+		JPanel panel1 = new JPanel();
+		panel1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel1.setBounds(10, 11, 564, 308);
+		contentPane.add(panel1);
 
 		// Populate book dropdown with data from the database
 		try {
@@ -229,7 +232,7 @@ public class FrmOrder extends JFrame {
 	}
 
 	// Private Method: getAllLibraryIDs()
-	
+
 	private List<String> getAllLibraryIDs() throws SQLException {
 		List<String> libraryIDs = new ArrayList<>();
 
@@ -245,8 +248,8 @@ public class FrmOrder extends JFrame {
 		return libraryIDs;
 	}
 
-	//	Private Method: getBookNameByID(bookID)
-	
+	// Private Method: getBookNameByID(bookID)
+
 	private String getBookNameByID(String bookID) throws SQLException {
 		String bookName = null;
 
@@ -264,7 +267,7 @@ public class FrmOrder extends JFrame {
 	}
 
 	// Private Method: getLibraryNameByID(libraryID)
-	
+
 	private String getLibraryNameByID(String libraryID) throws SQLException {
 		String libraryName = null;
 

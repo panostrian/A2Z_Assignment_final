@@ -53,6 +53,7 @@ public class FrmBookInsert extends JFrame {
 				textFieldBookID.setText("");
 				textFieldTitle.setText("");
 				textFieldYear.setText("");
+				textFieldAuthor.setText("");
 			}
 		});
 
@@ -63,20 +64,6 @@ public class FrmBookInsert extends JFrame {
 		lblBookID.setBounds(47, 37, 60, 25);
 		contentPane.add(lblBookID);
 
-		JLabel lblTitle = new JLabel("Title");
-		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTitle.setForeground(new Color(153, 0, 0));
-		lblTitle.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
-		lblTitle.setBounds(47, 77, 60, 25);
-		contentPane.add(lblTitle);
-
-		JLabel lblYear = new JLabel("Year");
-		lblYear.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblYear.setForeground(new Color(153, 0, 0));
-		lblYear.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
-		lblYear.setBounds(47, 117, 60, 22);
-		contentPane.add(lblYear);
-
 		textFieldBookID = new JTextField();
 		textFieldBookID.setEditable(false);
 		textFieldBookID.setFont(new Font("Malgun Gothic", Font.PLAIN, 16));
@@ -85,15 +72,53 @@ public class FrmBookInsert extends JFrame {
 		contentPane.add(textFieldBookID);
 		textFieldBookID.setColumns(12);
 
+		JLabel lblTitle = new JLabel("Title");
+		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTitle.setForeground(new Color(153, 0, 0));
+		lblTitle.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+		lblTitle.setBounds(47, 77, 60, 25);
+		contentPane.add(lblTitle);
+
 		textFieldTitle = new JTextField();
 		textFieldTitle.setBounds(116, 80, 442, 25);
 		contentPane.add(textFieldTitle);
 		textFieldTitle.setColumns(10);
 
+		JLabel lblYear = new JLabel("Year");
+		lblYear.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblYear.setForeground(new Color(153, 0, 0));
+		lblYear.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+		lblYear.setBounds(47, 117, 60, 22);
+		contentPane.add(lblYear);
+
 		textFieldYear = new JTextField();
 		textFieldYear.setBounds(116, 120, 120, 25);
 		textFieldYear.setColumns(10);
 		contentPane.add(textFieldYear);
+
+		JLabel lblEdition = new JLabel("Edition");
+		lblEdition.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEdition.setForeground(new Color(153, 0, 0));
+		lblEdition.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+		lblEdition.setBounds(47, 157, 60, 25);
+		contentPane.add(lblEdition);
+
+		textFieldEdition = new JTextField();
+		textFieldEdition.setBounds(117, 160, 120, 25);
+		contentPane.add(textFieldEdition);
+		textFieldEdition.setColumns(10);
+
+		JLabel lblAuthor = new JLabel("Author(s)");
+		lblAuthor.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAuthor.setForeground(new Color(153, 0, 0));
+		lblAuthor.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+		lblAuthor.setBounds(27, 197, 80, 25);
+		contentPane.add(lblAuthor);
+
+		textFieldAuthor = new JTextField();
+		textFieldAuthor.setColumns(10);
+		textFieldAuthor.setBounds(117, 200, 441, 25);
+		contentPane.add(textFieldAuthor);
 
 //===========================================================================================
 
@@ -152,43 +177,14 @@ public class FrmBookInsert extends JFrame {
 
 //===========================================================================================
 
-		textFieldEdition = new JTextField();
-		textFieldEdition.setBounds(117, 160, 120, 25);
-		contentPane.add(textFieldEdition);
-		textFieldEdition.setColumns(10);
-
-		JLabel lblEdition = new JLabel("Edition");
-		lblEdition.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblEdition.setForeground(new Color(153, 0, 0));
-		lblEdition.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
-		lblEdition.setBounds(47, 157, 60, 25);
-		contentPane.add(lblEdition);
-
-		JLabel lblAuthor = new JLabel("Author(s)");
-		lblAuthor.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAuthor.setForeground(new Color(153, 0, 0));
-		lblAuthor.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
-		lblAuthor.setBounds(27, 197, 80, 25);
-		contentPane.add(lblAuthor);
-
-		textFieldAuthor = new JTextField();
-		textFieldAuthor.setColumns(10);
-		textFieldAuthor.setBounds(117, 200, 441, 25);
-		contentPane.add(textFieldAuthor);
-
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(63, 271, 445, 2);
 		contentPane.add(separator_1);
-
-//===========================================================================================
 
 		// JPanel Container
 		JPanel panel1 = new JPanel();
 		panel1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel1.setBounds(10, 10, 564, 308);
 		contentPane.add(panel1);
-
-		JSeparator separator = new JSeparator();
-		panel1.add(separator);
 	}
 }

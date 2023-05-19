@@ -29,6 +29,7 @@ public class FrmLibraryView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private PreparedStatement pst;
 	private ResultSet rs;
+
 	private JTextField textFieldLibraryID_view;
 	private JTextField textFieldLibraryName_view;
 	private JTextField textFieldAddress_view;
@@ -137,6 +138,7 @@ public class FrmLibraryView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DriverClass.librarysearchlist.setEnabled(true);
 				DriverClass.libraryview.setVisible(false);
+				DriverClass.librarysearchlist.refreshData(); // Refresh the table data
 			}
 		});
 		btn_Close_view.setForeground(new Color(0, 0, 153));
@@ -151,7 +153,7 @@ public class FrmLibraryView extends JFrame {
 		btn_update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String query = "UPDATE LIBRARY set LIBRARY_NAME = ?, LIBRARY_ADDRESS = ?, LIBRARY_PHONE = ? where TEACHER_ID = ?";
+					String query = "UPDATE LIBRARY set LIBRARY_NAME = ?, LIBRARY_ADDRESS = ?, LIBRARY_PHONE = ? where LIBRARY_ID = ?";
 
 					Connection conn = DBconnector.getConnection();
 					PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -159,6 +161,8 @@ public class FrmLibraryView extends JFrame {
 					preparedStmt.setString(1, textFieldLibraryName_view.getText());
 					preparedStmt.setString(2, textFieldAddress_view.getText());
 					preparedStmt.setString(3, textFieldPhone_view.getText());
+					preparedStmt.setInt(4, Integer.parseInt(textFieldLibraryID_view.getText()));
+
 
 					int numberOfRowsAffected = preparedStmt.executeUpdate();
 
@@ -176,20 +180,17 @@ public class FrmLibraryView extends JFrame {
 		contentPane.add(btn_update);
 
 //===========================================================================================
-
 		// Event Handler for Delete
 		JButton btn_delete = new JButton("Delete");
 		btn_delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String query = "DELETE from LIBRARY where LIBRARY_ID = ?";
-
 					Connection conn = DBconnector.getConnection();
 					PreparedStatement preparedStmt = conn.prepareStatement(query);
 					preparedStmt.setInt(1, Integer.parseInt(textFieldLibraryID_view.getText()));
 
 //===========================================================================================
-
 					// Execute the prepared statement after confirmation
 					int dialogButton;
 					dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure you wish to delete this itemn ?",
