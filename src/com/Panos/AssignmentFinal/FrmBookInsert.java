@@ -120,6 +120,10 @@ public class FrmBookInsert extends JFrame {
 		textFieldAuthor.setBounds(117, 200, 441, 25);
 		contentPane.add(textFieldAuthor);
 
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(63, 271, 445, 2);
+		contentPane.add(separator_1);
+
 //===========================================================================================
 
 		// Insert Button for adding new books
@@ -127,6 +131,7 @@ public class FrmBookInsert extends JFrame {
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setForeground(new Color(0, 0, 153));
 		btnInsert.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
+
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -148,6 +153,7 @@ public class FrmBookInsert extends JFrame {
 					JOptionPane.showMessageDialog(null, n + " Record inserted.", "INSERT", JOptionPane.PLAIN_MESSAGE);
 
 					ps.close();
+
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, "Error occurred while inserting the record.", "Error",
 							JOptionPane.WARNING_MESSAGE);
@@ -176,10 +182,6 @@ public class FrmBookInsert extends JFrame {
 		contentPane.add(btnClose);
 
 //===========================================================================================
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(63, 271, 445, 2);
-		contentPane.add(separator_1);
 
 		// JPanel Container
 		JPanel panel1 = new JPanel();

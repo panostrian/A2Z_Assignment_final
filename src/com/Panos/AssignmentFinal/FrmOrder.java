@@ -12,10 +12,6 @@ import javax.swing.border.EtchedBorder;
 
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -27,8 +23,6 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
-import java.util.ArrayList;
 
 public class FrmOrder extends JFrame {
 	/**
@@ -59,8 +53,9 @@ public class FrmOrder extends JFrame {
 			public void windowActivated(WindowEvent e) {
 				// Clear input fields
 				textFieldStock.setText("");
-				bookDropdown.setSelectedIndex(0);
-				libraryDropdown.setSelectedIndex(0);
+
+				// bookDropdown.setSelectedIndex(0);
+				// libraryDropdown.setSelectedIndex(0);
 			}
 		});
 
@@ -96,60 +91,75 @@ public class FrmOrder extends JFrame {
 		separator_1.setBounds(63, 271, 445, 2);
 		contentPane.add(separator_1);
 
+//==========================================================================================
+
+		// JComboBox for book dropdown
+		JComboBox<String> bookDropdown = new JComboBox<>();
+		bookDropdown.setBounds(200, 53, 308, 31);
+		contentPane.add(bookDropdown);
+
+		// JComboBox for library dropdown
+		JComboBox<String> libraryDropdown = new JComboBox<>();
+		libraryDropdown.setBounds(200, 112, 308, 28);
+		contentPane.add(libraryDropdown);
+
+		try {
+			Connection conn = DBconnector.getConnection();
+			PreparedStatement bookStatement = conn.prepareStatement("SELECT BOOK_ID FROM BOOK");
+			PreparedStatement libraryStatement = conn.prepareStatement("SELECT LIBRARY_ID FROM LIBRARY");
+
+			// Populate the book dropdown
+			ResultSet bookResultSet = bookStatement.executeQuery();
+			while (bookResultSet.next()) {
+				String bookID = bookResultSet.getString("BOOK_ID");
+				bookDropdown.addItem(bookID);
+			}
+
+			// Populate the library dropdown
+			ResultSet libraryResultSet = libraryStatement.executeQuery();
+			while (libraryResultSet.next()) {
+				String libraryID = libraryResultSet.getString("LIBRARY_ID");
+				libraryDropdown.addItem(libraryID);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 //===========================================================================================
-
 		// JButton for order and add action listener
-
 		JButton btnInsert = new JButton("Order");
 		btnInsert.setForeground(new Color(0, 0, 153));
 		btnInsert.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
-		btnInsert.setBounds(248, 283, 95, 25);
-		contentPane.add(btnInsert);
 
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String selectedBookID = bookDropdown.getSelectedItem().toString();
-				String selectedLibraryID = libraryDropdown.getSelectedItem().toString();
-				int stock = Integer.parseInt(textFieldStock.getText());
+				try {
+					String selectedBookID = bookDropdown.getSelectedItem().toString();
+					String selectedLibraryID = libraryDropdown.getSelectedItem().toString();
+					int stock = Integer.parseInt(textFieldStock.getText());
 
-				// Check if the combination already exists in the BOOKLIBRARIES table
-				String query = "SELECT * FROM LIBRARYBOOKS WHERE BOOK_ID = ? AND LIBRARY_ID = ?";
-				try (Connection conn = DBconnector.getConnection();
-						PreparedStatement ps = conn.prepareStatement(query)) {
+					Connection conn = DBconnector.getConnection();
+					PreparedStatement ps = conn.prepareStatement(
+							"INSERT INTO LIBRARYBOOKS (FK_BOOK_ID, FK_LIBRARY_ID, STOCK) VALUES (?, ?, ?)");
 					ps.setString(1, selectedBookID);
 					ps.setString(2, selectedLibraryID);
-					ResultSet resultSet = ps.executeQuery();
-					if (resultSet.next()) {
-						// Combination already exists, show error message
-						JOptionPane.showMessageDialog(contentPane, "Combination already exists", "Error",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						// Combination doesn't exist, insert new row into BOOKLIBRARIES table
-						String insertQuery = "INSERT INTO LIBRARYBOOKS (BOOK_ID, LIBRARY_ID, STOCK) VALUES (?, ?, ?)";
-						try (PreparedStatement insertPs = conn.prepareStatement(insertQuery)) {
-							insertPs.setString(1, selectedBookID);
-							insertPs.setString(2, selectedLibraryID);
-							insertPs.setInt(3, stock);
-							insertPs.executeUpdate();
+					ps.setInt(3, stock);
 
-							// Display success message
-							JOptionPane.showMessageDialog(contentPane, "Order placed successfully", "Success",
-									JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(contentPane, "Order placed successfully", "Success",JOptionPane.INFORMATION_MESSAGE);
 
-							// Clear input fields
-							textFieldStock.setText("");
-							bookDropdown.setSelectedIndex(0);
-							libraryDropdown.setSelectedIndex(0);
-						} catch (SQLException ex) {
-							ex.printStackTrace();
-						}
-					}
-				} catch (SQLException ex) {
-					ex.printStackTrace();
+					ps.close();
+
+				} catch (SQLException e3) {
+					JOptionPane.showMessageDialog(contentPane, "Error occurred while inserting the order", "Error",
+							JOptionPane.ERROR_MESSAGE);
+					e3.printStackTrace();
+
 				}
 			}
 		});
-
+		btnInsert.setBounds(248, 283, 95, 25);
+		contentPane.add(btnInsert);
 //===========================================================================================
 
 		// JButton for close and add action listener
@@ -166,117 +176,18 @@ public class FrmOrder extends JFrame {
 		btnClose.setBounds(463, 283, 95, 25);
 		contentPane.add(btnClose);
 
-//==========================================================================================
-
-		// JComboBox for book dropdown
-		JComboBox<String> bookDropdown = new JComboBox<>();
-		bookDropdown.setBounds(200, 53, 308, 31);
-		contentPane.add(bookDropdown);
-
-		// JComboBox for library dropdown
-		JComboBox<String> libraryDropdown = new JComboBox<>();
-		libraryDropdown.setBounds(200, 112, 308, 28);
-		contentPane.add(libraryDropdown);
-
-//===========================================================================================
+// ===========================================================================================
 
 		// JPanel Container
 		JPanel panel1 = new JPanel();
 		panel1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel1.setBounds(10, 11, 564, 308);
 		contentPane.add(panel1);
-
-		// Populate book dropdown with data from the database
-		try {
-			List<String> bookIDs = getAllBookIDs(); // Retrieve book IDs from the database
-			for (String bookID : bookIDs) {
-				// Retrieve the book name based on the book ID from the database
-				String bookName = getBookNameByID(bookID);
-				bookDropdown.addItem(bookName); // Add the book name to the dropdown
-			}
-
-			List<String> libraryIDs = getAllLibraryIDs(); // Retrieve library IDs from the database
-			for (String libraryID : libraryIDs) {
-				// Retrieve the library name based on the library ID from the database
-				String libraryName = getLibraryNameByID(libraryID);
-				libraryDropdown.addItem(libraryName); // Add the library name to the dropdown
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 // ========================================================================================
+//                           Helper Methods
+// ========================================================================================
 
-	// Private Method: getAllBookIDs()
-
-	private List<String> getAllBookIDs() throws SQLException {
-		List<String> bookIDs = new ArrayList<>();
-
-		String query = "SELECT BOOK_ID FROM BOOK";
-		Connection conn = DBconnector.getConnection();
-		try (PreparedStatement ps = conn.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				String bookID = resultSet.getString("BOOK_ID");
-				bookIDs.add(bookID);
-			}
-		}
-
-		return bookIDs;
-	}
-
-	// Private Method: getAllLibraryIDs()
-
-	private List<String> getAllLibraryIDs() throws SQLException {
-		List<String> libraryIDs = new ArrayList<>();
-
-		String query = "SELECT LIBRARY_ID FROM LIBRARY";
-		Connection conn = DBconnector.getConnection();
-		try (PreparedStatement ps = conn.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				String libraryID = resultSet.getString("LIBRARY_ID");
-				libraryIDs.add(libraryID);
-			}
-		}
-
-		return libraryIDs;
-	}
-
-	// Private Method: getBookNameByID(bookID)
-
-	private String getBookNameByID(String bookID) throws SQLException {
-		String bookName = null;
-
-		String query = "SELECT BOOK_TITLE FROM BOOK WHERE BOOK_ID = ?";
-		Connection conn = DBconnector.getConnection();
-		try (PreparedStatement ps = conn.prepareStatement(query)) {
-			ps.setString(1, bookID);
-			ResultSet resultSet = ps.executeQuery();
-			if (resultSet.next()) {
-				bookName = resultSet.getString("BOOK_TITLE");
-			}
-		}
-
-		return bookName;
-	}
-
-	// Private Method: getLibraryNameByID(libraryID)
-
-	private String getLibraryNameByID(String libraryID) throws SQLException {
-		String libraryName = null;
-
-		String query = "SELECT LIBRARY_NAME FROM LIBRARY WHERE LIBRARY_ID = ?";
-		Connection conn = DBconnector.getConnection();
-		try (PreparedStatement ps = conn.prepareStatement(query)) {
-			ps.setString(1, libraryID);
-			ResultSet resultSet = ps.executeQuery();
-			if (resultSet.next()) {
-				libraryName = resultSet.getString("LIBRARY_NAME");
-			}
-		}
-
-		return libraryName;
-	}
 
 }

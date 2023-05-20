@@ -67,7 +67,6 @@ public class FrmStockBookLibraries extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DriverClass.stockbooklibraries.setEnabled(false);
 				DriverClass.order.setVisible(true);
-				refreshData(); // Refresh the table data
 			}
 		});
 		contentPane.add(btnMakeOrder);
@@ -112,10 +111,11 @@ public class FrmStockBookLibraries extends JFrame {
 					ResultSet rs = pst.executeQuery();
 
 					while (rs.next()) {
-						Object[] data = new Object[3];
-						data[0] = rs.getInt("ORDER_BOOK_ID");
-						data[1] = rs.getString("ORDER_LIBRARY_ID");
-						data[2] = rs.getInt("STOCK");
+						Object[] data = new Object[4];
+						data[0] = rs.getInt("ORDER_ID");
+						data[1] = rs.getInt("FK_BOOK_ID");
+						data[2] = rs.getString("FK_LIBRARY_ID");
+						data[3] = rs.getInt("STOCK");
 						model.addRow(data);
 					}
 
@@ -148,10 +148,11 @@ public class FrmStockBookLibraries extends JFrame {
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
-				Object[] data = new Object[3];
-				data[0] = rs.getInt("ORDER_BOOK_ID");
-				data[1] = rs.getString("ORDER_LIBRARY_ID");
-				data[2] = rs.getInt("STOCK");
+				Object[] data = new Object[4];
+				data[0] = rs.getInt("ORDER_ID");
+				data[1] = rs.getInt("FK_BOOK_ID");
+				data[2] = rs.getString("FK_LIBRARY_ID");
+				data[3] = rs.getInt("STOCK");
 				model.addRow(data);
 			}
 

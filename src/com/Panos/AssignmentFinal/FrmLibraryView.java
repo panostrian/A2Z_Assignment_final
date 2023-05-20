@@ -63,7 +63,7 @@ public class FrmLibraryView extends JFrame {
 
 					Connection conn = DBconnector.getConnection();
 					pst = conn.prepareStatement(querry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-					pst.setString(1, FrmBookSearchList.searchTitle + '%');
+					pst.setString(1, FrmLibrarySearchList.searchName + '%');
 					rs = pst.executeQuery();
 					if (rs.next()) {
 						updateFieldsFromResultSet();
