@@ -11,7 +11,7 @@ public class DriverClass {
     static FrmLibraryView libraryview;
     static FrmLibrarySearchList librarysearchlist;
     static FrmOrder order;
-    static FrmStockBookLibraries stockbooklibraries;
+    static FrmStockLibraryBooks stockbooklibraries;
     static FrmVersion version;
 
 
@@ -47,7 +47,7 @@ public class DriverClass {
                     libraryinsert.setLocationRelativeTo(null);
                     libraryinsert.setVisible(false);
                     
-                    stockbooklibraries = new FrmStockBookLibraries();
+                    stockbooklibraries = new FrmStockLibraryBooks();
                     stockbooklibraries.setLocationRelativeTo(null);
                     stockbooklibraries.setVisible(false);
                     

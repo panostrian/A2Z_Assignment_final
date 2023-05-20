@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class FrmStockBookLibraries extends JFrame {
+public class FrmStockLibraryBooks extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	// serchTitle is package-private static var that
@@ -32,7 +32,7 @@ public class FrmStockBookLibraries extends JFrame {
 	private JTable table_3;
 	private JLabel lblBookLibraries;
 
-	public FrmStockBookLibraries() {
+	public FrmStockLibraryBooks() {
 		final JPanel contentPane;
 
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/resources/aueb.jpg")));
