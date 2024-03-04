@@ -1,4 +1,4 @@
-package com.Panos.AssignmentFinal;
+package com.Panos.Final;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

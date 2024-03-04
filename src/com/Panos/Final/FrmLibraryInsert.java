@@ -1,4 +1,4 @@
-package com.Panos.AssignmentFinal;
+package com.Panos.Final;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
