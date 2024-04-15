@@ -1,8 +1,18 @@
 # LibraryBooks_A2Z_project
 
-The final assignment I made for an e-Learning 6month programme, 
-called "Programming with Java: A to Z", at the Economic University of Athens (ΟΠΑ) , worth 10 ECTS points,
-and for which I succefully passed with full grade and gained a certificate.
+## Project Overview
 
-It is a JDBC porgramme , which connects to a very simple and small SQL database I made (not included here). 
-It registers books into libraries.
+This repository contains the final assignment I completed for the six-month e-Learning program, "Programming with Java: A to Z", offered by the Economic University of Athens (ΟΠΑ). The course was worth 10 ECTS points. I successfully passed with full grades and earned a certificate.
+
+## About the Application
+
+This project features a Java-based JDBC application that interfaces with a simple and small SQL database I created. The application is designed to manage book records within libraries.
+
+### Database Setup
+
+- **Location**: The database file is located at `LibraryBooks_A2Z_project/src/database`.
+- **Usage**: To establish a connection, open the database file in MySQL.
+
+## Features
+
+- **Book Registration**: Register books into various libraries using a JDBC connection to manipulate and query the database.
